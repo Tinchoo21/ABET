@@ -1,0 +1,177 @@
+
+body {
+    background: #e2e2e5;
+    font-family: "Inter UI", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .page {
+    background: #e2e2e5;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 40px);
+    position: absolute;
+    place-content: center;
+    width: calc(100% - 40px);
+  }
+  @media (max-width: 767px) {
+    .page {
+      height: auto;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+    }
+  }
+  .container {
+    display: flex;
+    height: 320px;
+    margin: 0 auto;
+    width: 640px;
+  }
+  .logo{
+    margin-top: 10px;
+   margin-left: 25%;
+    width: 50%;
+    height: auto;
+   
+  }
+  @media (max-width: 767px) {
+    .container {
+      flex-direction: column;
+      height: 630px;
+      width: 320px;
+    }
+  }
+  
+  .left {
+    background: white;
+    height: calc(100% - 40px);
+    top: 20px;
+    position: relative;
+    width: 50%;
+  }
+  @media (max-width: 767px) {
+    .left {
+      height: 100%;
+      left: 20px;
+      width: calc(100% - 40px);
+      max-height: 270px;
+    }
+  }
+  .login {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    font-family: "Times New Roman", Times, serif;
+    color:  #0A2558 /*#474a59*/;
+    margin: 0px 40px 0px 40px;
+    
+  }
+  .eula {
+    text-align: center;
+    color: #999;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0px 40px;
+    color: #0A2558;
+  }
+  #error-message{
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+    display: block;
+    width: 100% !important;
+    color: red;
+    font-weight: 900;
+    margin: auto;
+  }
+  .right {
+    background: #0A2558/* #474a59*/;
+    box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
+    color: #f1f1f2;
+    position: relative;
+    width: 50%;
+  }
+  @media (max-width: 767px) {
+    .right {
+      flex-shrink: 0;
+      height: 100%;
+      width: 100%;
+      max-height: 350px;
+    }
+  }
+  svg {
+    position: absolute;
+    width: 320px;
+  }
+  path {
+    fill: none;
+    stroke:rgb(245, 130, 31) /*url(#linearGradient)*/;
+    stroke-width: 4;
+    stroke-dasharray: 240 1386;
+  }
+  .form {
+    margin: 40px;
+    position: absolute;
+  }
+  label {
+    color: white;
+   /* color:  #c2c2c5;*/
+    display: block;
+    font-size: 14px;
+    height: 16px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+  input {
+    background: transparent;
+    border: 0;
+    color: #f2f2f2;
+    font-size: 20px;
+    height: 30px;
+    line-height: 30px;
+    outline: none !important;
+    width: 100%;
+  }
+  input::-moz-focus-inner {
+    border: 0;
+  }
+  #submit {
+    color: #707075;
+    margin-top: 40px;
+    transition: color 300ms;
+    cursor: pointer;
+  }
+  
+  #submit:focus {
+    color: #f2f2f2;
+  }
+  #submit:active {
+    color: #d0d0d2;
+  }
+  .password-container {
+    position: relative;
+  }
+  .password-container input[type="password"] {
+    padding-right: 40px;
+  }
+  .password-container button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 40px;
+    background: url(hide.png) no-repeat center;
+    background-size: 25px;
+    border: none;
+    filter: hue-rotate(180deg);
+    outline: none;
+    cursor: pointer;
+  }
+  .password-container button.active {
+    background: url(show.png) no-repeat center;
+    background-size: 25px;
+    border: none;
+    outline: none;
+    filter: hue-rotate(180deg);
+    cursor: pointer;
+  }

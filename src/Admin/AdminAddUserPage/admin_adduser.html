@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> ABET | Admin </title>
+    <link rel="stylesheet" href="./admin_adduser.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/665181cd03.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx'>
+                <img src="abetlogo.png" width="30px" height="30px" draggable="false" />
+            </i>
+            <span class="logo_name">Admin</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="admin">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Performance</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin_addcourse">
+                  <i class='bx bx-book-add'></i>
+                  <span class="links_name">Add course</span>
+                </a>
+              </li>
+            
+            <li>
+                <a href="admin_listofusers">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">List of users</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin_adduser" class="active">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Add user</span>
+                </a>
+            </li>
+            <li class="log_out">
+                <a href="logout">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Add user</span>
+            </div>
+
+            <div class="profile-details">
+                <div class="profile-center">
+                    <i class='bx bx-user'></i>
+                    <span class="admin_name" id="nameAndSurname">
+                        <script>
+                            fetch('/nameAndSurname')
+                                .then(response => response.text())
+                                .then(data => {
+                                    document.getElementById('nameAndSurname').textContent = data;
+                                });
+                        </script>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="home-content">
+
+
+            <div class="overview-boxes">
+                <div class="box">
+                    <div class="right-side">
+                        <div class="number">Admin <i class="fa-solid fa-user-tie"></i></div>
+                        <div class="box-topic" id="adminUsers">
+                            <script>
+                                fetch('/totalAdminUsers')
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('adminUsers').textContent = "Num. of employees : " + data;
+                                    });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="number">Instructor <i class="fa-solid fa-chalkboard-user"></i></div>
+                        <div class="box-topic" id="personUsers">
+                            <script>
+                                fetch('/totalPersonUsers')
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('personUsers').textContent = "Num. of employees : " + data;
+                                    });
+                            </script>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="box">
+                    <div class="right-side">
+                        <div class="number">Total <i class="fa-solid fa-users-between-lines"></i> </div>
+                        <div class="box-topic" id="total">
+                            
+                            <script>
+                                fetch('/totalNumUsers')
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        document.getElementById('total').textContent = "Num. of employees : " + data;
+                                    });
+                            </script>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+
+                    <div class="sales-details">
+                        <div class="form-style-5">
+                            <form action="adduser">
+                                <fieldset>
+                                    <legend>Add user</legend>
+                                    <input type="name" name="name" id="name" placeholder="Name *" required=""
+                                        oninvalid="this.setCustomValidity('Please, enter valid name')"
+                                        oninput="setCustomValidity('')">
+                                    <input type="surname" name="surname" id="surname" placeholder="Surname *"
+                                        required="" oninvalid="this.setCustomValidity('Please, enter valid surname')"
+                                        oninput="setCustomValidity('')">
+                                    <input type="username" name="username" id="username" placeholder="Username *" required=""
+                                        oninvalid="this.setCustomValidity('Please, enter valid email')"
+                                        oninput="setCustomValidity('')">
+                                    <input type="password" name="password" id="password" placeholder="Password *"
+                                        required="" oninvalid="this.setCustomValidity('Please, enter valid password')"
+                                        oninput="setCustomValidity('')">
+
+                                    <label for="job">Department:</label>
+                                    <select id="job" name="department" required>
+                                        <optgroup label="Department">
+                                            <option value="Admin">Admin</option>
+                                            <option value="Instructor">Instructor</option>
+
+                                        </optgroup>
+
+                                    </select>
+                                </fieldset>
+
+                                <input type="submit" onclick="makeRequest()" value="Add" />
+                            </form>
+                            <span id="error-message"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="top-sales box">
+                    <div class="title">Employees</div>
+                    <ul class="top-sales-details">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function () {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+
+        function makeRequest() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        const response = document.getElementById('error-message');
+                        const data = JSON.parse(xhr.responseText);
+                        if (xhr.status === 200) {
+
+                            if (data.message === 'success') {
+
+
+                                window.location.href = data.redirect;
+
+                            }
+                        }
+                        else {
+
+                            response.textContent = 'Korisničko ime je već u upotrebi';
+
+
+                        }
+
+                    }
+                };
+                xhr.open('POST', '/adduser');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                const username = document.getElementById('username').value;
+                const name = document.getElementById('name').value;
+                const surname = document.getElementById('surname').value;
+                const password = document.getElementById('password').value;
+                const department = document.getElementById('job').value;
+
+                const data = JSON.stringify({ username, password, name, surname, department });
+
+                xhr.send(data);
+            });
+        }
+
+        let tableHtml = "";
+        fetch('/userLogin')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(user => {
+                    let date = new Date(user.last_login);
+                    const formattedDate = date.toLocaleString();
+                    let image = "";
+                    let statusClass = "";
+                    if (user.department === "Admin") {
+                        image = '"fa-solid fa-user-tie fa-xl"'
+                    } else if (user.department === "Instructor") {
+                        image = '"fa-solid fa-chalkboard-user fa-xl"';
+                    } 
+                    const now = new Date();
+                    const isToday = now.toDateString() === date.toDateString();
+
+                    if (isToday) {
+                        statusClass = "online";
+                    } else {
+                        statusClass = "offline";
+                    }
+
+                    tableHtml += `<li><a draggable="false"><i id="upoIcons" class=${image}></i> <span class="product">${user.name} ${user.surname}</span></a>  <span class="${statusClass}">${formattedDate}</span></li><hr>`;
+                });
+                const tableContainer = document.querySelector(".top-sales-details");
+                tableContainer.innerHTML = tableHtml;
+            })
+            .catch(error => console.error(error));
+
+
+    </script>
+
+</body>
+
+</html>
